@@ -24,6 +24,7 @@ Arrlist* createlist(int ini_capacity, int size){
 	list->size = 0;
 	list->capacity = ini_capacity;
 	list->element_size = size;
+	return 0;
 }
 
 void deletelist(Arrlist *list){
@@ -98,3 +99,5 @@ void clearlist(Arrlist *list){
 	}
 	list-> size =0;	
 }
+
+	
