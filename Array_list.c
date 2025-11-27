@@ -33,15 +33,6 @@ void deletelist(Arrlist *list){
 	free(list);
 }
 
-void clearlist(Arrlist *list){
-	if(!list) return;
-	for (int i=0; i<list->size; i++){
-		free(list->data[i]);
-		list->data[i] = NULL;
-	}
-	list-> size =0;
-}
-	
 void addlist(Arrlist *list, void * element){
 	if (!list || !element) return;
 	if (list->size >= list->capacity){
@@ -70,4 +61,40 @@ void insertlist(Arrlist *list, void *element, int index){
 	}
 	memcpy (list->data[index], element, list->element_size);
 	list->size++;
+}
+	
+void *getlist(Arrlist *list, int index){
+	if (!list ||index < 0|| index > list->size) return NULL;
+	return list->data[index];
+}
+	
+int removelist(Arrlist *list, int index){
+	if (!list ||index < 0|| index > list->size) return 0;
+	free(list->data[index]);
+	for (int i=index; i< list->size; i++){
+		list->data[i]= list-> data[i+1];
+	}
+	list->size--;
+	list-> data[list->size]= NULL;
+	return 1;
+}
+
+void adjust_capacity(Arrlist *list, int min_capacity){
+	if(!list || min_capacity <= list->capacity) return;
+	void **new_data = (void**) realloc (list->data, sizeof(void*) * min_capacity);
+	if (!new_data){
+		printf("\nError al asignar memoria\n");
+		return;
+	}
+	list->data = new_data;
+	list->capacity = min_capacity;
+}
+
+void clearlist(Arrlist *list){
+	if(!list) return;
+	for (int i=0; i<list->size; i++){
+		free(list->data[i]);
+		list->data[i] = NULL;
+	}
+	list-> size =0;	
 }
