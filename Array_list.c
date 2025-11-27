@@ -18,14 +18,56 @@ Arrlist* createlist(int ini_capacity, int size){
 	list -> data =(void**)malloc(sizeof(void*)*ini_capacity);
 	if(!list->data){
 		free(list);
-		printf("No se pudo solicitar memoria para almacenar los datos de la lista");
+		printf("\nNo se pudo solicitar memoria para almacenar los datos de la lista\n");
 		return NULL;
 	}
-	
-	list->size =0;
+	list->size = 0;
 	list->capacity = ini_capacity;
-	list->size = size;
+	list->element_size = size;
 }
-int main(){
+
+void deletelist(Arrlist *list){
+	if(!list) return;
+	clearlist(list);
+	free(list->data);
+	free(list);
+}
+
+void clearlist(Arrlist *list){
+	if(!list) return;
+	for (int i=0; i<list->size; i++){
+		free(list->data[i]);
+		list->data[i] = NULL;
+	}
+	list-> size =0;
+}
 	
+void addlist(Arrlist *list, void * element){
+	if (!list || !element) return;
+	if (list->size >= list->capacity){
+		adjust_capacity(list, list->capacity * GROW_FACT);
+	}
+	list->data[list->size] = malloc(list->element_size);
+	if(!list->data[list->size]){
+		printf("\nError al asignar memoria para el elemento\n");
+	}
+	memcpy(list->data[list->size], element, list->element_size);
+	list->size++;
+}
+
+void insertlist(Arrlist *list, void *element, int index){
+	if (!list || !element ||index < 0) return;
+	if (list->size >= list->capacity){
+		adjust_capacity(list, list->capacity * GROW_FACT);
+	}
+	for (int i=list->size; i> index; i--){
+		list->data[i] = list->data[i-1];
+	}
+	list->data[index] = malloc(list->element_size);
+	if (!list->data[index]){
+		printf("\nError al asignar memoria para el elemento\n");
+		return;
+	}
+	memcpy (list->data[index], element, list->element_size);
+	list->size++;
 }
