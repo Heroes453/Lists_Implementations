@@ -9,7 +9,7 @@ typedef struct{
 }Arrlist;
 
 //Crear o borrar listas
-Arrlist* createlist(int capacity, int element_size);
+Arrlist* createlist(int ini_capacity, int size);
 void deletelist(Arrlist *list);
 
 //Operaciones
@@ -23,5 +23,7 @@ void clearlist(Arrlist *list);
 void adjust_capacity(Arrlist *list, int min_cap);
 void adjust_size(Arrlist *list);
 Arrlist* clonelist(Arrlist *list);
+
+
 
 #endif
