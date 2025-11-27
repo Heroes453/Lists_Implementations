@@ -1,4 +1,4 @@
-#ifndef ARRAY_LIST.H
+#ifndef ARRAY_LIST_H
 #define ARRAY_LIST_H
 
 typedef struct{

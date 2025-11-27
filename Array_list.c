@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Array_list.h"
+#include "array_list.h"
 
 #define DEFAULT_CAP 10
 #define GROW_FACT 2
@@ -25,4 +25,7 @@ Arrlist* createlist(int ini_capacity, int size){
 	list->size =0;
 	list->capacity = ini_capacity;
 	list->size = size;
+}
+int main(){
+	
 }
