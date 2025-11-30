@@ -11,7 +11,7 @@ Arrlist* createlist(int ini_capacity, int size){
 		ini_capacity = DEFAULT_CAP;
 	}	
 	Arrlist* list=(Arrlist*)malloc(sizeof(Arrlist));
-	if (list){
+	if (!list){
 		printf("\nNo se pudo inicializar la lista\n");
 		return NULL;
 	}
@@ -24,7 +24,7 @@ Arrlist* createlist(int ini_capacity, int size){
 	list->size = 0;
 	list->capacity = ini_capacity;
 	list->element_size = size;
-	return 0;
+	return list;
 }
 
 void deletelist(Arrlist *list){
@@ -47,6 +47,7 @@ void addlist(Arrlist *list, void * element){
 	list->size++;
 }
 
+
 void insertlist(Arrlist *list, void *element, int index){
 	if (!list || !element ||index < 0) return;
 	if (list->size >= list->capacity){
@@ -64,7 +65,7 @@ void insertlist(Arrlist *list, void *element, int index){
 	list->size++;
 }
 	
-void *getlist(Arrlist *list, int index){
+void* getlist(Arrlist *list, int index){
 	if (!list ||index < 0|| index > list->size) return NULL;
 	return list->data[index];
 }
@@ -100,4 +101,3 @@ void clearlist(Arrlist *list){
 	list-> size =0;	
 }
 
-	

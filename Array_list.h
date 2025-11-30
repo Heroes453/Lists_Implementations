@@ -15,7 +15,7 @@ void deletelist(Arrlist *list);
 //Operaciones
 void addlist(Arrlist *list, void *element); 
 void insertlist(Arrlist *list, void *element, int index); 
-void *getlist(Arrlist *list, int index); 
+void* getlist(Arrlist *list, int index); 
 int removelist(Arrlist *list, int index); 
 void clearlist(Arrlist *list);
 
